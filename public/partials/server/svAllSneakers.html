@@ -1,0 +1,91 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+  <h1>
+    Dashboard
+    <small>Version 2.0</small>
+  </h1>
+  <ol class="breadcrumb">
+    <li><a href=""><i class="fa fa-dashboard"></i> Home</a></li>
+    <li><a ui-sref="server"> Dashboard</a></li>
+    <li class="active"> View All Sneakers</li>
+  </ol>
+</section>
+
+<!-- Main content -->
+<section class="content" >
+  <!-- Info boxes -->
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">All Sneakers</h3>
+                </div><!-- /.box-header -->
+                <div id class="box-body">
+                <table id="example1" class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th rowspan="2">ID</th>
+                            <th rowspan="2">Name</th>
+                            <th rowspan="2">Gender</th>
+                            <th rowspan="2">Category</th>
+                            <th rowspan="2">Brand</th>
+                            <th rowspan="2">Color</th>
+                            <th rowspan="2">Price</th>
+                            <th style="text-align: center;" colspan="9">Size</th>
+                        </tr>
+                        <tr>
+                            <th>36</th>
+                            <th>37</th>
+                            <th>38</th>
+                            <th>39</th>
+                            <th>40</th>
+                            <th>41</th>
+                            <th>42</th>
+                            <th>43</th>
+                            <th>44</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr ng-repeat="item in listSneakers"> 
+                            <td>{{item.ID}}</td>
+                            <td>{{item.ProductName}}</td>
+                            <td>{{item.Gender}}</td>
+                            <td>{{item.Category}}</td>
+                            <td>{{item.Brand}}</td>
+                            <td>{{item.Color}}</td>
+                            <td>{{item.Price | currency}}</td>
+                            <td ng-repeat="itemDetail in item.ItemDetail">{{itemDetail.NumberProduct}}</td>
+                        </tr>
+                    </tbody>
+
+                    <tfoot>
+                        <tr>
+                            <th rowspan="2">ID</th>
+                            <th rowspan="2">Name</th>
+                            <th rowspan="2">Gender</th>
+                            <th rowspan="2">Type</th>
+                            <th rowspan="2">Brand</th>
+                            <th rowspan="2">Color</th>
+                            <th rowspan="2">Price</th>
+                            <th>36</th>
+                            <th>37</th>
+                            <th>38</th>
+                            <th>39</th>
+                            <th>40</th>
+                            <th>41</th>
+                            <th>42</th>
+                            <th>43</th>
+                            <th>44</th> 
+                        </tr>
+                        <tr>
+                            <th style="text-align: center;" colspan="9">Size</th>
+                        </tr>
+                    </tfoot>
+                </table>
+                </div><!-- /.box-body -->
+            </div><!-- /.box -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+
+</section><!-- /.content -->

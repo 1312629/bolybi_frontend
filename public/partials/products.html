@@ -1,0 +1,100 @@
+<link rel="stylesheet" href="../css/products.css">
+<style>
+    .card-title h4{
+        white-space: nowrap;
+    }
+</style>
+
+<!-- Navbar goes here -->
+<div class="main" style="margin-top: 50px;">
+    <div class="container">
+        <div class="row">
+            <div class="temp">
+                <div class="col s3" id="listProduct">
+                    <!-- Grey navigation panel -->
+                    <ul class="collection with-header">
+                        <li class="collection-header">
+                            <h4>GENDER</h4></li>
+                        <a href="" ng-repeat="gender in genders" class="collection-item" ng-click="filters.Gender = gender.val">
+                            <p1>{{gender.name}}</p1><span class="badge">1</span></a>
+                    </ul>
+                    
+                    <ul class="collection with-header">
+                        <li class="collection-header">
+                            <h4>TYPE</h4></li>
+                        <a href="" ng-repeat="type in types" class="collection-item" ng-click="filters.Type = type.val; filters.Category = ''">
+                            <p1>{{type.name}}</p1><span class="badge">1</span></a>
+                    </ul>
+
+                    <ul class="collection with-header">
+                        <li class="collection-header">
+                            <h4>BRAND</h4></li>
+                        <a href="" ng-repeat="brand in brands" class="collection-item" ng-click="filters.Brand = brand.val">
+                            <p1>{{brand.name}}</p1><span class="badge">1</span></a>
+                    </ul>
+
+                    <ul class="collection with-header">
+                        <li class="collection-header">
+                            <h4>COLORS</h4></li>
+                        <a href="" ng-repeat="color in colors" class="collection-item" ng-click="filters.Color = color.val">
+                            <p1>{{color.name}}</p1><span class="badge">1</span></a>
+                    </ul>
+
+                    <ul class="collection with-header">
+                        <li class="collection-header">
+                            <h4>CATEGORY</h4></li>
+                        <a href="" ng-repeat="category in categories" class="collection-item" ng-click="filters.Category = category.val">
+                            <p1>{{category.name}}</p1><span class="badge">1</span></a>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col s9">
+                <!-- Teal page content  -->
+
+                <div class="row">
+                    <div class="col s8">
+                        <ul class="breadcrumb">
+                            <li active>
+                                <p1>Gender = <span class="blue-text text-darken-2">{{filters.Gender}}</span>   |   Type = <span class="blue-text text-darken-2">{{filters.Type}}</span>   |   Brand = <span class="blue-text text-darken-2">{{filters.Brand}}</span>   |   Color = <span class="blue-text text-darken-2">{{filters.Color}}</span>   |   Category = <span class="blue-text text-darken-2">{{filters.Category}}</span>   |</p1>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <ul class="category">
+                    <li class="card small col s4 hoverable card-hover" ng-repeat="item in listProducts | filter:filters">
+                        <div class="card-image waves-effect waves-block waves-light">
+                            <img class="activator" ng-src="{{item.ItemMeta[0].MetaValue}}">
+                        </div>
+                        <div class="card-content">
+                            <span class="card-title activator grey-text text-darken-4"><h4>{{item.ProductName}}</h4><i class="material-icons right">more_vert</i></span>
+                            <a class="btn waves-effect" href="" ng-click="showDetail(item.index)">
+                                <p1>Shop Now!</p1>
+                            </a>
+                        </div>
+                        <div class="card-reveal">
+                            <span class="card-title grey-text text-darken-4"><h4>{{item.ProductName}}</h4><i class="material-icons right">close</i></span>
+                            <p>Description about the product.</p>
+                            <a class="btn waves-effect" href="" ng-click="showDetail(item.index)">
+                                <p1>Shop Now!</p1>
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+
+                <div class="row hide">
+                    <ul class="pagination">
+                        <li class="disabled"><a href=""><i class="material-icons">chevron_left</i></a></li>
+                        <li class="active"><a href="">1</a></li>
+                        <li class="waves-effect"><a href="">2</a></li>
+                        <li class="waves-effect"><a href="">3</a></li>
+                        <li class="waves-effect"><a href="">4</a></li>
+                        <li class="waves-effect"><a href="">5</a></li>
+                        <li class="waves-effect"><a href=""><i class="material-icons">chevron_right</i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

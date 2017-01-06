@@ -1,0 +1,182 @@
+<!--Import materialize.css-->
+<!-- Compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
+<link rel="stylesheet" href="css/style.css">
+<div class="parallax-container">
+    <div class="parallax"><img src="../images/cover.jpg"></div>
+    <div class="banner">
+        <div class="container">
+            <div class="header-top">
+                <div class="header-top-left">
+                    <a href="" class="flow-text modal-trigger" ng-click="btnCartClick()">Cart:{{cart.totalPrice | currency}} ({{cart.Num}} items) <i class="fa fa-shopping-cart" aria-hidden="true" style="font-size:18px;"></i></a>
+                    <a class="empty-cart" href="" ng-click="emptyCart()">Empty Cart</a>
+                </div>
+                <div class="header-top-right" >
+                    <div>
+                        <a href="">VNĐ</a>
+                    </div>
+                    <div class="mid">
+                        <a href="" ng-click="login()"><i class="fa fa-user" aria-hidden="true"></i> {{displayName}}</a>
+                    </div>
+                    <div>
+                        <a href="" ng-show="isLogin" ng-click="logout()">Log out</a>
+                    </div>
+                </div>
+            </div>
+            <div class="header-bottom">
+                <div class="logo">
+                    <a ui-sref="main.home">
+                        <h1 class="text"><b style="color:#F9D9BE;">B</b>OLYBI</h1>
+                    </a>
+                </div>
+                <div class="header-bot-right">
+                    <div class="show-form">
+                        <a class="show-men" href="">MENS</a>
+                        <div class="form-hover">
+                            <ul>
+                                <li class="li-hd">MEN</li>
+                                <li ng-repeat = "cate in listCate"><a href="" ng-click="addFilters(null, cate.name, 'Male')">{{cate.name}}</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="show-form">
+                        <a class="show-women" href="">WOMENS</a>
+                        <div class="form-hover">
+                            <ul>
+                                <li class="li-hd">WOMEN</li>
+                                <li ng-repeat = "cate in listCate"><a href="" ng-click="addFilters(null, cate.name, 'Female')">{{cate.name}}</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="show-form">
+                        <a class="show-acessories" href="" style="cursor: pointer;" ng-click="addFilters('accessories', null, null)">ACCESSORIES</a>
+                    </div>
+                    <div class="show-form">
+                        <a href="" class="sale" style="cursor: pointer;">SALE</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Content-->
+<div class="main">
+    <ui-view></ui-view>
+</div>
+
+<!--Footer-->
+<div class="Footer">
+    <div class="container">
+        <div class="Newsletter">
+            <h3>Newsletter</h3>
+            <div class="SubGroup">
+                <input type="text" class="tbSub">
+                <input type="submit" class="btSub" value="Subscribe">
+            </div>
+        </div>
+        <div class="Footer-bot">
+            <div class="Footer-menu">
+                <ul>
+                    <li>
+                        <a ui-sref="main.about">PRIVACY</a>
+                    </li>
+                    <li>
+                        <a ui-sref="main.about">TERMS</a>
+                    </li>
+                    <li>
+                        <a href="">SHOP</a>
+                    </li>
+                    <li>
+                        <a ui-sref="main.about">ABOUT</a>
+                    </li>
+                    <li>
+                        <a ui-sref="main.about">CONTACT</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="social">
+                <ul>
+                    <li>
+                        <a href="http://facebook.com"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                    </li>
+                    <li>
+                        <a href="http://facebook.com"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                    </li>
+                    <li>
+                        <a href="http://facebook.com"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                    </li>
+            </div>
+        </div>
+        <div class="copyright">
+            © 2016 BolybiShop. All Rights Reserved | Design by <a href="http://team-vant.tk">NVT</a>
+        </div>
+    </div>
+</div>
+    
+<!-- Cart Modals -->
+<div id="modalCart" class="modal modal-fixed-footer" >
+    <div class="modal-content">
+        <h1 ng-show="isLogin && !isOrder">Cart</h1>
+
+        <h1 ng-show="!isLogin">Please Login First to use Cart</h1>
+        <table class="highlight responsive-table" ng-show="isLogin && !isOrder">
+            <thead>
+                <tr>
+                    <th>Image</th>
+                    <th>Item ID</th>
+                    <th>Item Name</th>
+                    <th>Item Size</th>
+                    <th>Quantity</th>
+                    <th>Price per Item</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in cart.cartDetail">
+                    <td><img ng-src="{{item.item.itemMeta[0].metaValue}}" style="width: 120px; height: 120px"></td>
+                    <td>{{item.item.id}}</td>
+                    <td>{{item.item.name}}</td>
+                    <td>{{item.size}}</td>
+                    <td>{{item.num}}</td>
+                    <td style="min-width: 65px;">{{item.item.price}}</td>
+                    <td><a class="waves-effect waves-dark red-text" ng-click="btnRemoveClick($index)" style="padding:5px 5px;">Remove</a></td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th colspan="6">Total:</th>
+                    <th style="padding: 15px 0px;">{{cart.totalPrice | currency}} VNĐ</th>
+                </tr>
+            </tfoot>
+        </table>
+        <h1 ng-show="isOrder">Fill Orders Infomations</h1>
+        <form class="col s12" ng-show="isOrder">
+            <div class="row">
+                <div class="input-field col s5">
+                    <i class="material-icons prefix">account_circle</i>
+                    <input id="icon_prefix" type="text" class="validate" ng-model="order.receiver">
+                    <label for="icon_prefix">Name</label>
+                </div>
+                <div class="input-field col s5">
+                    <i class="material-icons prefix">phone</i>
+                    <input id="icon_telephone" type="tel" class="validate" ng-model="order.phone">
+                    <label for="icon_telephone">Telephone</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s11">
+                    <i class="material-icons prefix">room</i>
+                    <textarea id="textarea1" class="materialize-textarea" ng-model="order.address"></textarea>
+                    <label for="textarea1">Address</label>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <a class="modal-action modal-close waves-effect waves-green btn-flat" style="padding: 0px 30px;">Close</a>
+        <a class="waves-effect waves-light btn" ng-click="btnOrderClick()" style="padding: 0px 30px;" ng-show="isLogin && !isOrder">Order</a>
+        <a class="waves-effect waves-light btn btn-red teal lighten-1" ng-click="btnSubmitClick()" style="padding: 0px 30px;" ng-show="isOrder">Submit</a>
+        <a class="waves-effect waves-green btn-flat" ng-click="isOrder=false" style="padding: 0px 30px;" ng-show="isOrder">Back</a>
+    </div>
+</div>

@@ -1,0 +1,60 @@
+<!--Import materialize.css-->
+<!-- Compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
+<link rel="stylesheet" href="css/style.css">
+<div class="blue-grey darken-1" style="background: url('http://www.twitrcovers.com/wp-content/uploads/2012/12/Danboard-sneakers-l.jpg') no-repeat center center; position: fixed; top:0; left: 0; width: 100%; height: 100%; background-size: cover;">
+<!--Login Modal-->
+    <div id="loginModal" class="modal white-text" style="display: block !important;">
+        <div class="modal-content transparent">
+            <h4>BOLYBI</h4>
+            <div class="row">
+                <form class="col s12">
+                    <div class="row container">
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">account_circle</i>
+                            <input id="icon_prefix" ng-model="email" type="email" class="validate">
+                            <label for="icon_prefix">Email</label>
+                        </div>
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">https</i>
+                            <input id="icon_password" ng-model="password" type="password" class="validate">
+                            <label for="icon_password">Password</label>
+                        </div>
+                        <div class="login" ng-show="create">
+                            <a href="" class="col s12 waves-effect waves-light btn-flat modal-action modal-close" ng-click="login()">Log in</a>
+                        </div>
+                        <div class="forgot" ng-show="create">
+                            <a href="" class="col s12">
+                                <p>Forgot your login details?</p> Get help singing in.
+                            </a>
+                        </div>
+                        <div class="col s12 or" ng-show="create">
+                            <div>OR</div>
+                        </div>
+                        <div class="login" ng-show="create">
+                            <a href="" class="col s12 waves-effect waves-light btn-flat modal-action modal-close" ng-click="loginFB()">LOG IN WITH FACEBOOK</a>
+                        </div>
+                        <div class="none" ng-show="create"></div>
+                        <div class="login" ng-show="create">
+                            <a style="margin-top: 20px;" href="" class="col s12 waves-effect waves-light btn-flat" ng-click="loginGG()">LOG IN WITH GOOGLE+</a>
+                        </div>
+                        <div class="col s12 dont" ng-show="create">
+                            <div>Don't have an account?</div>
+                        </div>
+                        <div class="login" ng-show="create">
+                            <a href="" class="col s12 waves-effect waves-light btn-flat" ng-click="setCreate(false)">CREATE AN ACCOUNT?</a>
+                        </div>
+
+                        <div class="login" ng-show="!create">
+                            <a href="" class="col s12 waves-effect waves-light btn-flat modal-action modal-close" ng-click="signUp()">CREATE NEW ACCOUNT</a>
+                        </div>
+                        <div class="login" style="margin-top: 400px !important;" ng-show="!create">
+                            <a href="" class="col s12 waves-effect waves-light btn-flat" ng-click="setCreate(true)">BACK</a>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

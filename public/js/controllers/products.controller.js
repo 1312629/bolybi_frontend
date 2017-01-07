@@ -79,6 +79,7 @@ appControllers.controller('productsController', ['$scope', '$state', 'productsSe
         
         $scope.showDetail = function (index){
             Cookies.set("idShowDetail", index);
+            console.log(index);
             $state.go("main.viewProduct");
         }
     }

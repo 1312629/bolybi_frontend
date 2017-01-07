@@ -1,28 +1,46 @@
 appServices.factory('cartsService', [
   function() {
-      var cart = {id: "C001", customer: {}, createdDate: "", status: "", cartDetail: [], totalPrice: 0};
+      //var cart = {id: "C001", customer: {}, createdDate: "", status: "", cartDetail: [], totalPrice: 0};
+      var cart = null;
+      
+      var updatePrice = function() {
+          cart.TotalPrice = 0;
+          for (var i = 0; i < cart.CartDetail.length; i++) {
+              cart.TotalPrice = parseInt(cart.TotalPrice) + (parseInt(cart.CartDetail[i].Item.Price) * parseInt(cart.CartDetail[i].Item.NumberProduct));
+          }
+      }
       
       var service = {
           eraseCart : function() {
-              cart = {id: "C001", customer: {}, createdDate: "", status: "", cartDetail: [], totalPrice: 0};
+              //cart = {id: "C001", customer: {}, createdDate: "", status: "", cartDetail: [], totalPrice: 0};
+              cart.CartDetail = [];
+              cart.TotalPrice = 0;
               return cart;
           },
           
           getCart : function() {
+              if (cart == null) {
+                  cart = JSON.parse(Cookies.get('cart'));
+              }
+              updatePrice();
               return cart;
           },
           
           setCart : function(car) {
-            cart = car;  
+              if(car.TotalPrice === null) {
+                  car.TotalPrice = 0;
+              }
+              cart = car;
+              updatePrice();
           },
           
           getInitCartDetail : function() {
-              var cartDetail = {id: "", idCart: cart.id, item: {}, size: "", num: 0};
+              var cartDetail = {ID: "", IdCart: cart.ID, Item: {}, Size: "", NumberProduct: 0};
               return cartDetail;
           },
           
           isValidCartDetail : function(cDetail) {
-              if (cDetail.item != null && parseInt(cDetail.num) > 0 && cDetail.size != null){
+              if (cDetail.Item != null && parseInt(cDetail.NumberProduct) > 0 && cDetail.Size != null){
                   return true;
               }
               return false;
@@ -30,8 +48,8 @@ appServices.factory('cartsService', [
           
           /* check if cart detail in cart, return index */
           checkCartDetailInCart : function(cDetail){
-              for (var i = 0; i < cart.cartDetail.length; i++) {
-                  if (cDetail.item.id == cart.cartDetail[i].item.id && cDetail.size == cart.cartDetail[i].size) {
+              for (var i = 0; i < cart.CartDetail.length; i++) {
+                  if (cDetail.Item.ID == cart.CartDetail[i].Item.ID && cDetail.Size == cart.CartDetail[i].Size) {
                       return i;
                   }
               }
@@ -45,11 +63,11 @@ appServices.factory('cartsService', [
                   var index = service.checkCartDetailInCart(cDetail);
                   console.log(index);
                   if (index === null) {
-                      cart.cartDetail.push(cDetail);
+                      cart.CartDetail.push(cDetail);
                   } else {
-                      cart.cartDetail[index].num = parseInt(cart.cartDetail[index].num) +  parseInt(cDetail.num);
+                      cart.CartDetail[index].num = parseInt(cart.cartDetail[index].num) +  parseInt(cDetail.num);
                   }
-                  cart.totalPrice = parseInt(cart.totalPrice) + (parseInt(cDetail.item.price) * parseInt(cDetail.num));
+                  cart.TotalPrice = parseInt(cart.totalPrice) + (parseInt(cDetail.item.price) * parseInt(cDetail.num));
                   Materialize.toast("Add new Item to Cart!", 3000);
                   return cart;
               }
@@ -57,8 +75,8 @@ appServices.factory('cartsService', [
           
           /* remove cart detail out of cart */
           removeCartDetailFromCart : function(index) {
-              if (index >= 0 && index < cart.cartDetail.length) {
-                  cart.cartDetail.splice(index, 1);
+              if (index >= 0 && index < cart.CartDetail.length) {
+                  cart.CartDetail.splice(index, 1);
               }
               return cart;
           }

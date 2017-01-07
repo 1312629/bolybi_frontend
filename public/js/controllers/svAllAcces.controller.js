@@ -1,5 +1,6 @@
 appControllers.controller('svAllAccesController', ['$scope', '$state', 'accessoriesService',
 	function($scope, $state, accessoriesService) {
+        $('body').removeClass('loaded');
         accessoriesService.getAllAccessories(function(err, result){
             if (err) {return window.alert(err);}
             if (result.Code != 200) {
@@ -13,6 +14,8 @@ appControllers.controller('svAllAccesController', ['$scope', '$state', 'accessor
                 $scope.listAccessories[i].ItemDetail = result.Data[i].ListDetail;
             }
             console.log($scope.listAccessories);
+            $('body').addClass('loaded');
+            $scope.$apply();
         })
 	}
 ]);

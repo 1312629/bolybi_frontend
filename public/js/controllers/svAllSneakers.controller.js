@@ -12,6 +12,7 @@ appControllers.controller('svAllSneakersController', ['$scope', '$state', 'sneak
                 $scope.listSneakers[i].ItemMeta = result.Data[i].ListMeta;
                 $scope.listSneakers[i].ItemDetail = result.Data[i].ListDetail;
             }
+            $scope.$apply();
             console.log($scope.listSneakers);
         })
 	}

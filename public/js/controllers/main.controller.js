@@ -15,7 +15,7 @@ appControllers.controller('mainController', ['$scope', '$state', 'authService', 
             $scope.displayName = "Login";
             $scope.isLogin = false;
         } else {
-            $scope.displayName = $scope.user.displayName;
+            $scope.displayName = $scope.user.FullName;
             $scope.isLogin = true;
         }
         
@@ -64,7 +64,7 @@ appControllers.controller('mainController', ['$scope', '$state', 'authService', 
         }
         
         $scope.btnOrderClick = function(){
-            if ($scope.cart.cartDetail.length > 0) {
+            if ($scope.cart.CartDetail.length > 0) {
                 $scope.isOrder = true;
                 $scope.order = ordersService.createOrder($scope.cart);
                 $scope.order.customer = $scope.user;

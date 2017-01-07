@@ -1,5 +1,7 @@
 appControllers.controller('homeController', ['$scope', '$state',
 	function($scope, $state) {
+        $('body').addClass('loaded');
+        
         $scope.addFilters = function(type, cate, gender){
             Cookies.remove('type');
             Cookies.remove('cate');

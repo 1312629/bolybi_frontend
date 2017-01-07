@@ -1,7 +1,7 @@
 appControllers.controller('viewProductController', ['$scope', '$state', '$timeout', 'productsService', 'cartsService',
 	function($scope, $state, $timeout, productsService, cartsService) {
         
-        if (Cookies.get("idShowDetail") == null || Cookies.get("type") == null) {
+        if (Cookies.get("idShowDetail") == null) {
             $state.go("main.products");
         }
         
@@ -33,17 +33,23 @@ appControllers.controller('viewProductController', ['$scope', '$state', '$timeou
             $timeout(function(){
                 $('select').material_select();
                 $('.caret').html("");
+                $('.materialboxed').materialbox();
             }, 500);
             $('body').addClass('loaded');
         })
         
         $scope.selectedIndexImg = 0;
         $scope.selectedIndexSize = "0";
+        window.sc = $scope.selectedIndexImg;
         
 //        $scope.cartDetail = cartsService.getInitCartDetail();
 //        $scope.cartDetail.item = $scope.thisProduct;
 //        $scope.cartDetail.num = 0;
 //        $scope.cartDetail.size = $scope.thisProduct.ItemDetail[0].Size;
+        
+        $scope.changeImg = function(index) {
+            $scope.selectedIndexImg = index;
+        }
         
         $scope.addToCart = function() {
             if (Cookies.get("user") == null) {

@@ -8,7 +8,7 @@
         <div class="container">
             <div class="header-top">
                 <div class="header-top-left">
-                    <a href="" class="flow-text modal-trigger" ng-click="btnCartClick()">Cart:{{cart.totalPrice | currency}} ({{cart.Num}} items) <i class="fa fa-shopping-cart" aria-hidden="true" style="font-size:18px;"></i></a>
+                    <a href="" class="flow-text modal-trigger" ng-click="btnCartClick()">Cart:{{cart.TotalPrice | currency}} ({{cart.Num}} items) <i class="fa fa-shopping-cart" aria-hidden="true" style="font-size:18px;"></i></a>
                     <a class="empty-cart" href="" ng-click="emptyCart()">Empty Cart</a>
                 </div>
                 <div class="header-top-right" >
@@ -133,20 +133,20 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="item in cart.cartDetail">
-                    <td><img ng-src="{{item.item.itemMeta[0].metaValue}}" style="width: 120px; height: 120px"></td>
-                    <td>{{item.item.id}}</td>
-                    <td>{{item.item.name}}</td>
-                    <td>{{item.size}}</td>
-                    <td>{{item.num}}</td>
-                    <td style="min-width: 65px;">{{item.item.price}}</td>
+                <tr ng-repeat="item in cart.CartDetail">
+                    <td><img ng-src="{{item.Item.ItemMeta[0].MetaValue}}" style="width: 120px; height: 120px"></td>
+                    <td>{{item.Item.ID}}</td>
+                    <td>{{item.Item.ProductName}}</td>
+                    <td>{{item.Size}}</td>
+                    <td>{{item.NumberProduct}}</td>
+                    <td style="min-width: 65px;">{{item.Item.Price}}</td>
                     <td><a class="waves-effect waves-dark red-text" ng-click="btnRemoveClick($index)" style="padding:5px 5px;">Remove</a></td>
                 </tr>
             </tbody>
             <tfoot>
                 <tr>
                     <th colspan="6">Total:</th>
-                    <th style="padding: 15px 0px;">{{cart.totalPrice | currency}} VNĐ</th>
+                    <th style="padding: 15px 0px;">{{cart.TotalPrice | currency}} VNĐ</th>
                 </tr>
             </tfoot>
         </table>

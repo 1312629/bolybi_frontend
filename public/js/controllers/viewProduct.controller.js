@@ -56,6 +56,8 @@ appControllers.controller('viewProductController', ['$scope', '$state', '$timeou
                 window.alert("Please login first to use Cart!");
                 $state.go("login");
             }
+            $scope.cartDetail.ID_Cart = cartsService.getCart().ID;
+            console.log($scope.cartDetail);
             cartsService.addCartDetailIntoCart($scope.cartDetail);
         }
 	}

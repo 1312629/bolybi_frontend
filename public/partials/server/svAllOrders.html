@@ -27,7 +27,7 @@
                         <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <th colspan="5" style="text-align: center!important;">Order's ID: {{listOrders[selectedIndex].id}}</th>
+                                        <th colspan="5" style="text-align: center!important;">Order's ID: {{listOrders[selectedIndex].ID}}</th>
                                     </tr>
                                     <tr>
                                         <th>ID Item</th>
@@ -38,18 +38,18 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr ng-repeat="orderDetail in listOrders[selectedIndex].orderDetail">
-                                        <td>{{orderDetail.item.id}}</td>
-                                        <td>{{orderDetail.item.name}}</td>
-                                        <td>{{orderDetail.size}}</td>
-                                        <td>{{orderDetail.num}}</td>
-                                        <td>{{orderDetail.price | currency}} VNĐ</td>
+                                    <tr ng-repeat="orderDetail in listOrders[selectedIndex].OrderDetail">
+                                        <td>{{orderDetail.Item.ID}}</td>
+                                        <td>{{orderDetail.Item.ProductName}}</td>
+                                        <td>{{orderDetail.Size}}</td>
+                                        <td>{{orderDetail.NumberProduct}}</td>
+                                        <td>{{orderDetail.Price | currency}} VNĐ</td>
                                     </tr>
                                 </tbody>
                                 <tfoot>
                                     <tr>
                                         <th colspan="4" style="text-align: center!important;">Total Price:</th>
-                                        <th>{{listOrders[selectedIndex].totalPrice}}</th>
+                                        <th>{{listOrders[selectedIndex].TotalPrice}}</th>
                                     </tr>
                                 </tfoot>
                         </table>
@@ -72,14 +72,14 @@
                         </thead>
                         <tbody>
                             <tr ng-repeat="order in listOrders">
-                                <td>{{order.id}}</td>
-                                <td>{{order.customer.uid}}</td>
-                                <td>{{order.receiver}}</td>
-                                <td>{{order.address}}</td>
-                                <td>{{order.phone}}</td>
-                                <td>{{order.createdDate}}</td>
-                                <td>{{order.totalPrice | currency}} VNĐ</td>
-                                <td>{{order.status}}</td>
+                                <td>{{order.ID}}</td>
+                                <td>{{order.ID_Customer}}</td>
+                                <td>{{order.CustomerName}}</td>
+                                <td>{{order.Address}}</td>
+                                <td>{{order.Phone}}</td>
+                                <td>{{order.CreatedDate}}</td>
+                                <td>{{order.TotalPrice | currency}} VNĐ</td>
+                                <td>{{order.Status}}</td>
                                 <td>
                                     <button type="button" class="btn btn-info" ng-click="showForm($index)">Show Detail</button>
                                 </td>

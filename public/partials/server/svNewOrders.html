@@ -22,46 +22,84 @@
                     <h3 class="box-title">New Orders</h3>
                 </div><!-- /.box-header -->
                 <div class="box-body">
-                  <table id="example1" class="table table-bordered table-striped">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Brand</th>
-                            <th>Color</th>
-                            <th>Price</th>
-                            <th>Quantity</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>A001</td>
-                            <td>Adidas socks</td>
-                            <td>Adidas</td>
-                            <td>White and Grey</td>
-                            <td>24000</td>
-                            <td>20</td>
-                        </tr>
-                        <tr>
-                            <td>A002</td>
-                            <td>Jordan socks</td>
-                            <td>Nike</td>
-                            <td>White and Grey</td>
-                            <td>24000</td>
-                            <td>20</td>
-                        </tr>
-                    </tbody>
-                    <tfoot>
-                      <tr>
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Brand</th>
-                            <th>Color</th>
-                            <th>Price</th>
-                            <th>Quantity</th>
-                        </tr>
-                    </tfoot>
-                  </table>
+                  <div style="position:relative;">
+                    <div class="formShowItems" ng-show="showDetail">
+                        <table id="example1" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th colspan="5" style="text-align: center!important;">Order's ID: {{listOrders[selectedIndex].ID}}</th>
+                                    </tr>
+                                    <tr>
+                                        <th>ID Item</th>
+                                        <th>Name</th>
+                                        <th>Size</th>
+                                        <th>Quantity</th>
+                                        <th>Price/Item</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="orderDetail in listOrders[selectedIndex].OrderDetail">
+                                        <td>{{orderDetail.Item.ID}}</td>
+                                        <td>{{orderDetail.Item.ProductName}}</td>
+                                        <td>{{orderDetail.Size}}</td>
+                                        <td>{{orderDetail.NumberProduct}}</td>
+                                        <td>{{orderDetail.Price | currency}} VNĐ</td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th colspan="4" style="text-align: center!important;">Total Price:</th>
+                                        <th>{{listOrders[selectedIndex].TotalPrice}}</th>
+                                    </tr>
+                                </tfoot>
+                        </table>
+                        <button type="button" class="btn btn-danger" ng-click="showDetail = false" style="margin:20px 10%;width: 80%;">Cancel</button>
+                    </div>
+                    <table id="example1" class="table table-bordered table-striped" ng-show="!showDetail">
+
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Customer ID</th>
+                                <th>Receiver</th>
+                                <th>Address</th>
+                                <th>Telephone</th>
+                                <th>Created Date</th>
+                                <th>Total Price</th>
+                                <th>Status</th>
+                                <th>View Detail</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="order in listOrders">
+                                <td>{{order.ID}}</td>
+                                <td>{{order.ID_Customer}}</td>
+                                <td>{{order.CustomerName}}</td>
+                                <td>{{order.Address}}</td>
+                                <td>{{order.Phone}}</td>
+                                <td>{{order.CreatedDate}}</td>
+                                <td>{{order.TotalPrice | currency}} VNĐ</td>
+                                <td>{{order.Status}}</td>
+                                <td>
+                                    <button type="button" class="btn btn-info" ng-click="showForm($index)">Show Detail</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>ID</th>
+                                <th>Customer ID</th>
+                                <th>Receiver</th>
+                                <th>Address</th>
+                                <th>Telephone</th>
+                                <th>Created Date</th>
+                                <th>Total Price</th>
+                                <th>Status</th>
+                                <th>View Detail</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                    </div>
                 </div><!-- /.box-body -->
             </div><!-- /.box -->
         </div><!-- /.col -->

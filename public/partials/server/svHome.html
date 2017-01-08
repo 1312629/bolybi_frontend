@@ -178,20 +178,22 @@
             <table class="table no-margin">
               <thead>
                 <tr>
-                  <th>ID</th>
-                  <th>Customer Name</th>
-                  <th>Created Date</th>
-                  <th>Status</th>
-                  <th>Total Price</th>
+                    <th>ID</th>
+                    <th>Customer ID</th>
+                    <th>Created Date</th>
+                    <th>Status</th>
+                    <th>Total Price</th>
+                    <th>Discount</th>
                 </tr>
               </thead>
               <tbody>
-                <tr ng-repeat="order in listOrders | orderBy:'-createdDate' | limitTo: 5">
-                  <td><a href="">{{order.id}}</a></td>
-                  <td>{{order.customer.displayName}}</td>
-                  <td>{{order.createdDate}}</td>
-                  <td><span class="label label-success" ng-show="order.status=='Finished'">{{order.status}}</span><span class="label label-info" ng-show="order.status!='Finished'">{{order.status}}</span></td>
-                  <td>{{order.totalPrice | currency}} VNĐ</td>
+                <tr ng-repeat="order in listOrders | orderBy:'-CreatedDate' | limitTo: 5">
+                  <td><a href="">{{order.ID}}</a></td>
+                  <td>{{order.ID_Customer}}</td>
+                  <td>{{order.CreatedDate}}</td>
+                  <td><span class="label label-success" ng-show="order.Status=='Finished'">{{order.Status}}</span><span class="label label-info" ng-show="order.Status!='Finished'">{{order.Status}}</span></td>
+                  <td>{{order.TotalPrice | currency}} VNĐ</td>
+                  <td>{{order.Discount | currency}} VNĐ</td>
                 </tr>
               </tbody>
             </table>

@@ -31,6 +31,8 @@ appControllers.controller('mainController', ['$scope', '$state', 'authService', 
         $scope.logout = function() {
             authService.logout(function() {
                 Materialize.toast("Logout!", 3000);
+                Cookies.remove('cart');
+                cartsService.setCart(null);
                 $state.reload();
             }, function(err){
                 return window.alert(err);
@@ -62,35 +64,70 @@ appControllers.controller('mainController', ['$scope', '$state', 'authService', 
         }
         
         $scope.btnRemoveClick = function(index){
-            $scope.cart = cartsService.removeCartDetailFromCart(index);
-            Materialize.toast("Removed Item from Cart!", 3000);
+            cartsService.removeCartDetailFromCart(index, function(err, result) {
+                if (err) {return window.alert(err);}
+                if (result.Code != 200) {
+                    return window.alert(result.Message);
+                }
+                Materialize.toast("Removed Item from Cart!", 3000);
+                cartsService.setCart(null);
+                $scope.cart = cartsService.getCart();
+                $('#modalCart').modal('close');
+            });
         }
         
         $scope.btnOrderClick = function(){
             if ($scope.cart.CartDetail.length > 0) {
                 $scope.isOrder = true;
                 $scope.order = ordersService.createOrder($scope.cart);
-                $scope.order.customer = $scope.user;
+                $scope.order.Customer = $scope.user;
+                $scope.order.ID_Customer = $scope.user.ID;
             } else {
                 Materialize.toast("The cart is empty! Cannot create new Order!", 3000);
             }    
         }
         
         $scope.btnSubmitClick = function() {
-            if ($scope.order.phone == null || $scope.order.address == null || $scope.order.receiver == null) {
+            if ($scope.order.Phone == null || $scope.order.Address == null || $scope.order.CustomerName == null) {
                 window.alert("Please fill all required input!");
             } else {
-                ordersService.addToListOrders($scope.order);
-                Materialize.toast("Added new Order!", 5000);
-                $scope.order = ordersService.getInitOrder();
-                $scope.isOrder = false;
+                var request = {};
+                request.Order = $scope.order;
+                request.ListOrderDetail = $scope.order.OrderDetail;
+                console.log(JSON.stringify(request));
+                ordersService.addNewOrder(request, function(err, result) {
+                    if (err) {return window.alert(err);}
+                    
+                    if (result.Code != 200) {
+                        window.alert(result.Message);
+                        Materialize.toast("Cannot Create Order!", 5000);
+                        $scope.isOrder = false;
+                    } else {
+                        Materialize.toast("Added new Order!", 5000);
+                        $scope.order = ordersService.getInitOrder();
+                        $scope.isOrder = false;
+                    }
+                });
             }
         }
         
         $scope.emptyCart = function() {
             var r = confirm("Are you sure?");
             if (r == true) {
-                $scope.cart = cartsService.eraseCart();
+                if ($scope.cart.CartDetail.length > 0) {
+                    cartsService.eraseCart(function(err, result) {
+                        if (err) { return window.alert(err)}
+                        if (result.Code != 200) {
+                            window.alert(result.Message);
+                        } else {
+                            Materialize.toast("Erased All Item In Cart!", 3000);
+                            cartsService.setCart(null);
+                            $scope.cart = cartsService.getCart();
+                        }
+                    });
+                } else {
+                    Materialize.toast("Erased All Item In Cart!", 3000);
+                }
             }
         }
 	}

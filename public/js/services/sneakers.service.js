@@ -108,10 +108,10 @@ appServices.factory('sneakersService', [
         
         getAllSneakers : function(callback) {
             var promise = new Promise((fullfill, reject) => {
+                console.log(serverUrl + apiGet);
                 $.ajax({
                     url: serverUrl + apiGet,
                     method: 'GET',
-                    contentType: "application/json",
                     success: fullfill,
                     error: reject
                 })

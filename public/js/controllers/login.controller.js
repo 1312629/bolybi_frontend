@@ -36,7 +36,7 @@ appControllers.controller('loginController', ['$scope', '$state', 'authService',
                         Materialize.toast("Login Succesfully!", 3000);
                         var cart = result.Data.Cart;
                         cart.CartDetail = result.Data.CartDetail;
-                        cartsService.setCart(cart);
+                        Cookies.set('cart', cart);
                         $state.go("main");
                     } else {
                         Materialize.toast("Cannot Create Account!", 3000);

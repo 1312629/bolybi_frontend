@@ -23,9 +23,9 @@ appControllers.controller('viewProductController', ['$scope', '$state', '$timeou
             $scope.thisProduct = $scope.listProducts[index];
             
             $scope.cartDetail = cartsService.getInitCartDetail();
-            $scope.cartDetail.item = $scope.thisProduct;
-            $scope.cartDetail.num = 0;
-            $scope.cartDetail.size = $scope.thisProduct.ItemDetail[0].Size;
+            $scope.cartDetail.Item = $scope.thisProduct;
+            $scope.cartDetail.NumberProduct = 0;
+            $scope.cartDetail.Size = $scope.thisProduct.ItemDetail[0].Size;
             
             $scope.$apply();
             console.log($scope.thisProduct);

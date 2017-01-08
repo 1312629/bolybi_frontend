@@ -15,6 +15,9 @@ appControllers.controller('mainController', ['$scope', '$state', 'authService', 
             $scope.displayName = "Login";
             $scope.isLogin = false;
         } else {
+            if ($scope.user.Type == "Admin") {
+                $state.go('server');
+            }
             $scope.displayName = $scope.user.FullName;
             $scope.isLogin = true;
         }

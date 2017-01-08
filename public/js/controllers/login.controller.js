@@ -25,6 +25,9 @@ appControllers.controller('loginController', ['$scope', '$state', 'authService',
                     //window.alert(result.Message);
 
                     if (result.Code == 200) {
+                        result.Data.Account.photoURL = fbUser.photoURL;
+                        result.Data.Account.CreatedDate = new Date(result.Data.Account.CreatedDate);
+                        result.Data.Account.CreatedDate = result.Data.Account.CreatedDate.toLocaleDateString();
                         Cookies.set("user", result.Data.Account);
                         Cookies.remove("fbUser");
                         if (!$scope.create) {

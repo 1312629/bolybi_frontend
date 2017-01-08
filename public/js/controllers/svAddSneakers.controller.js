@@ -28,6 +28,7 @@ appControllers.controller('svAddSneakersController', ['$scope', '$state', "sneak
                     return;
                 }
                 $scope.newSneakers = sneakersService.resetNewSneakers();
+                $scope.$apply();
             });
         }
         

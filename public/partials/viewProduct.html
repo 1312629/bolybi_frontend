@@ -38,7 +38,7 @@
                 </div>
                 <div class="row">
                     <div class="input-field col s12 size">
-                        <select ng-model="selectedIndexSize" ng-change="cartDetail.size=thisProduct.ItemDetail[selectedIndexSize].Size">
+                        <select ng-model="selectedIndexSize" ng-change="cartDetail.Size=thisProduct.ItemDetail[selectedIndexSize].Size">
                             <option ng-repeat="itemDetail in thisProduct.ItemDetail" value="{{$index}}">{{itemDetail.Size}}</option>
                         </select>
                         <label>Size</label>
@@ -46,7 +46,7 @@
                 </div>
                 <div class="row">
                     <div class="input-field col s12 size">
-                        <input type="number" ng-model="cartDetail.num" min="1" max="{{thisProduct.ItemDetail[selectedIndexSize].NumberProduct}}"/>
+                        <input type="number" ng-model="cartDetail.NumberProduct" min="1" max="{{thisProduct.ItemDetail[selectedIndexSize].NumberProduct}}"/>
                         <label>Quantity</label>
                     </div>
                 </div>

@@ -4,9 +4,13 @@ appControllers.controller('svnavigationBarController', ['$scope', '$state', 'aut
         /* Check login */
         if (Cookies.get("user") != null) {
             $scope.user = JSON.parse(Cookies.get("user"));
-            if ($scope.user.photoURL === null) {
+            if ($scope.user.photoURL == null) {
                 $scope.user.photoURL = "../../images/avatar_default.png";
             }
+            var splitString = $scope.user.CreatedDate.split("T");
+            $scope.user.CreatedDate = new Date($scope.user.CreatedDate);
+            $scope.user.CreatedDate = $scope.user.CreatedDate.toLocaleDateString();
+            console.log($scope.user);
         } else {
             $state.go("login");
         }

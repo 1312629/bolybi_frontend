@@ -57,6 +57,9 @@ appServices.factory('authService', [
                       //window.alert(result.Message);
                         
                       if (result.Code == 200) {
+                        result.Data.Account.photoURL = user.photoURL;
+                        result.Data.Account.CreatedDate = new Date(result.Data.Account.CreatedDate);
+                        result.Data.Account.CreatedDate = result.Data.Account.CreatedDate.toLocaleDateString();
                         Cookies.set("user", result.Data.Account);
                         var cart = result.Data.Cart;
                         cart.CartDetail = result.Data.CartDetail;
@@ -76,6 +79,7 @@ appServices.factory('authService', [
               }
       } else {
           Cookies.remove("user");
+          Cookies.remove("cart");
       }
     });
       

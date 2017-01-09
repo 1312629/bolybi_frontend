@@ -4,6 +4,9 @@ appControllers.controller('svnavigationBarController', ['$scope', '$state', 'aut
         /* Check login */
         if (Cookies.get("user") != null) {
             $scope.user = JSON.parse(Cookies.get("user"));
+            if ($scope.user.Type == "User") {
+                $state.go('main');
+            }
             if ($scope.user.photoURL == null) {
                 $scope.user.photoURL = "../../images/avatar_default.png";
             }

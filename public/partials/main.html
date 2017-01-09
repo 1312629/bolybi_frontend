@@ -8,7 +8,7 @@
         <div class="container">
             <div class="header-top">
                 <div class="header-top-left">
-                    <a href="" class="flow-text modal-trigger" ng-click="btnCartClick()">Cart:{{cart.TotalPrice | currency}} ({{cart.Num}} items) <i class="fa fa-shopping-cart" aria-hidden="true" style="font-size:18px;"></i></a>
+                    <a href="" class="flow-text modal-trigger" ng-click="btnCartClick()" style="padding: 10px 20px">Cart<i class="fa fa-shopping-cart" aria-hidden="true" style="font-size:18px; margin-left: 5px"></i></a>
                     <a class="empty-cart" href="" ng-click="emptyCart()">Empty Cart</a>
                 </div>
                 <div class="header-top-right" >
@@ -85,7 +85,7 @@
                         <a ui-sref="main.about">TERMS</a>
                     </li>
                     <li>
-                        <a href="">SHOP</a>
+                        <a ui-sref="main.products">SHOP</a>
                     </li>
                     <li>
                         <a ui-sref="main.about">ABOUT</a>

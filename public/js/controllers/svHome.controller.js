@@ -28,7 +28,7 @@ appControllers.controller('svHomeController', ['$scope', '$state', 'ordersServic
                 return window.alert(result.Message);
             }
             $scope.listOrders = [];
-            for(var i = 0; i < result.Data; i++) {
+            for(var i = 0; i < result.Data.length; i++) {
                 $scope.listOrders.push(result.Data[i].Order);
                 $scope.listOrders[i].CreatedDate = (new Date($scope.listOrders[i].CreatedDate)).toLocaleDateString();
             }

@@ -3,6 +3,9 @@
     .card-title h4{
         white-space: nowrap;
     }
+    .chosed {
+        background-color: #F9D9BE !important;
+    }
 </style>
 
 <!-- Navbar goes here -->
@@ -15,35 +18,35 @@
                     <ul class="collection with-header">
                         <li class="collection-header">
                             <h4>GENDER</h4></li>
-                        <a href="" ng-repeat="gender in genders" class="collection-item" ng-click="filters.Gender = gender.val">
+                        <a href="" ng-repeat="gender in genders" class="collection-item" ng-class="{'chosed': filters.Gender == gender.val}" ng-click="filters.Gender = gender.val">
                             <p1>{{gender.name}}</p1><span class="badge">1</span></a>
                     </ul>
                     
                     <ul class="collection with-header">
                         <li class="collection-header">
                             <h4>TYPE</h4></li>
-                        <a href="" ng-repeat="type in types" class="collection-item" ng-click="filters.Type = type.val; filters.Category = ''">
+                        <a href="" ng-repeat="type in types" class="collection-item" ng-click="filters.Type = type.val; filters.Category = ''" ng-class="{'chosed': filters.Type == type.val}">
                             <p1>{{type.name}}</p1><span class="badge">1</span></a>
                     </ul>
 
                     <ul class="collection with-header">
                         <li class="collection-header">
                             <h4>BRAND</h4></li>
-                        <a href="" ng-repeat="brand in brands" class="collection-item" ng-click="filters.Brand = brand.val">
+                        <a href="" ng-repeat="brand in brands" class="collection-item" ng-class="{'chosed': filters.Brand == brand.val}" ng-click="filters.Brand = brand.val">
                             <p1>{{brand.name}}</p1><span class="badge">1</span></a>
                     </ul>
 
                     <ul class="collection with-header">
                         <li class="collection-header">
                             <h4>COLORS</h4></li>
-                        <a href="" ng-repeat="color in colors" class="collection-item" ng-click="filters.Color = color.val">
+                        <a href="" ng-repeat="color in colors" class="collection-item" ng-class="{'chosed': filters.Color == color.val}" ng-click="filters.Color = color.val">
                             <p1>{{color.name}}</p1><span class="badge">1</span></a>
                     </ul>
 
                     <ul class="collection with-header">
                         <li class="collection-header">
                             <h4>CATEGORY</h4></li>
-                        <a href="" ng-repeat="category in categories" class="collection-item" ng-click="filters.Category = category.val">
+                        <a href="" ng-repeat="category in categories" class="collection-item" ng-class="{'chosed': filters.Category == category.val}" ng-click="filters.Category = category.val">
                             <p1>{{category.name}}</p1><span class="badge">1</span></a>
                     </ul>
                 </div>
@@ -52,7 +55,7 @@
             <div class="col s9">
                 <!-- Teal page content  -->
 
-                <div class="row">
+                <div class="row hide">
                     <div class="col s8">
                         <ul class="breadcrumb">
                             <li active>

@@ -38,12 +38,12 @@ appControllers.controller('svAllOrdersController', ['$scope', '$state', 'ordersS
                     return window.alert(result.Message);
                 }
                 $scope.listOrders = [];
-                for(var i = 0; i < result.Data; i++) {
+                for(var i = 0; i < result.Data.length; i++) {
                     $scope.listOrders.push(result.Data[i].Order);
                     $scope.listOrders[i].CreatedDate = (new Date($scope.listOrders[i].CreatedDate)).toLocaleDateString();
                     $scope.listOrders[i].OrderDetail = result.Data[i].ListOrderDetail;
-                    for (var j = 0; j < $scope.listOrder[i].OrderDetail.length; j++) {
-                        $scope.listOrder[i].OrderDetail[j].Item = findItemById($scope.listOrder[i].OrderDetail[j].ID_Item, $scope.listProducts);
+                    for (var j = 0; j < $scope.listOrders[i].OrderDetail.length; j++) {
+                        $scope.listOrders[i].OrderDetail[j].Item = findItemById($scope.listOrders[i].OrderDetail[j].ID_Item, $scope.listProducts);
                     }
                 }
                 $scope.$apply();

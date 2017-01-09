@@ -5,14 +5,22 @@ appControllers.controller('productsController', ['$scope', '$state', 'productsSe
         
         /* create filters */
         $scope.filters = {};
+        $scope.filters.Type = "";
+        $scope.filters.Category = "";
+        $scope.filters.Gender = "";
+        $scope.filters.Brand = "";
+        $scope.filters.Color = "";
         if (Cookies.get("type") != null){
             $scope.filters.Type = Cookies.get("type");
+            Cookies.remove("type");
         }
         if (Cookies.get("cate") != null) {
             $scope.filters.Category = Cookies.get("cate");
+            Cookies.remove("cate");
         }
         if (Cookies.get("gender") != null) {
             $scope.filters.Gender = Cookies.get("gender");
+            Cookies.remove("gender");
         }
         
         var isInList = function(item, list) {
@@ -52,7 +60,7 @@ appControllers.controller('productsController', ['$scope', '$state', 'productsSe
             $scope.categories = [{name: 'No Select', val: ''}, {name: 'Running', val: 'Running'}, {name: 'Casual', val: 'Casual'}, {name: 'Gym', val: 'Gym'}, {name: 'Basketball', val: 'Basketball'}, {name: 'Soccer', val: 'Soccer'}];
 
             /* CREATE LIST GENDER FOR SEARCH */
-            $scope.types = [{name: 'No Select', val: ''}, {name: 'Sneakers', val: 'sneakers'}, {name: 'Accessories', val: 'accessories'}];
+            $scope.types = [{name: 'No Select', val: ''}, {name: 'Sneakers', val: 'Sneakers'}, {name: 'Accessories', val: 'Accessories'}];
             
             $scope.$apply();
         }

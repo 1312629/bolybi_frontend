@@ -57,6 +57,7 @@ appServices.factory('authService', [
                       //window.alert(result.Message);
                         
                       if (result.Code == 200) {
+                          console.log(result);
                         result.Data.Account.photoURL = user.photoURL;
                         result.Data.Account.CreatedDate = new Date(result.Data.Account.CreatedDate);
                         result.Data.Account.CreatedDate = result.Data.Account.CreatedDate.toLocaleDateString();

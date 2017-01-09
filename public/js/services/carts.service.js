@@ -99,6 +99,7 @@ appServices.factory('cartsService', [
                   return true;
               }
               console.log("no valid");
+              Materialize.toast("ERROR: the Quantity is wrong!", 3000);
               return false;
           },
           

@@ -44,13 +44,14 @@ appControllers.controller('loginController', ['$scope', '$state', 'authService',
                     }
                 })
             } else if (user != null) {
-                console.log("checkSate");
+                console.log("checkState");
 //                if (!$scope.create) {
 //                    Materialize.toast("Create New Account Succesfully!", 3000);
 //                }
                 Materialize.toast("Login Succesfully!", 3000);
-                var cart = JSON.parse(Cookies.get('cart'));
-                cartsService.setCart(cart);
+                //var cart = JSON.parse(Cookies.get('cart'));
+                //cartsService.setCart(cart);
+                //cartsService.getCart();
                 
                 $state.go("main");
             }

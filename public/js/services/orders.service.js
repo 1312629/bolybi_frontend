@@ -5,6 +5,7 @@ appServices.factory('ordersService', [
         var apiAdd = 'Api/Order/v1/AddOrder';
         var apiGet = 'Api/Order/v1/GetOrder/';
         var apiGetAll = 'Api/Order/v1/GetAllOrder';
+        var apiUpdate = 'Api/Order/v1/UpdateOrder/'
       
         var listOrders = [];
 
@@ -41,6 +42,25 @@ appServices.factory('ordersService', [
                         callback(xhr.responseJSON, null)
                     }
                 );  
+            },
+            
+            updateOrder : function(id, data, callback) {
+                var promise = new Promise((fullfill, reject) => {
+                    $.ajax({
+                        url: serverUrl + apiUpdate + id,
+                        method: 'PUT',
+                        contentType: "application/json",
+                        data: JSON.stringify(data),
+                        success: fullfill,
+                        error: reject
+                    })
+                });
+                promise.then(
+                    function(result) { callback(null, result) },
+                    function(xhr, textStatus, errorThrown) { // xhr - XMLHttpRequest
+                        callback(xhr.responseJSON, null)
+                    }
+                );
             },
             
             addNewOrder : function(order, callback) {

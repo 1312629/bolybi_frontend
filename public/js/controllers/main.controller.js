@@ -160,6 +160,7 @@ appControllers.controller('mainController', ['$scope', '$state', 'authService', 
                         Materialize.toast("Added new Order!", 5000);
                         $scope.order = ordersService.getInitOrder();
                         $scope.isOrder = false;
+                        $('#modalCart').modal('close');
                     }
                 });
             }

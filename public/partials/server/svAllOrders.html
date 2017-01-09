@@ -56,7 +56,6 @@
                         <button type="button" class="btn btn-danger" ng-click="showDetail = false" style="margin:20px 10%;width: 80%;">Cancel</button>
                     </div>
                     <table id="example1" class="table table-bordered table-striped" ng-show="!showDetail">
-
                         <thead>
                             <tr>
                                 <th>ID</th>
@@ -65,9 +64,11 @@
                                 <th>Address</th>
                                 <th>Telephone</th>
                                 <th>Created Date</th>
+                                <th>End Date</th>
                                 <th>Total Price</th>
                                 <th>Status</th>
                                 <th>View Detail</th>
+                                <th>Next Process</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -78,10 +79,16 @@
                                 <td>{{order.Address}}</td>
                                 <td>{{order.Phone}}</td>
                                 <td>{{order.CreatedDate}}</td>
+                                <td> <span ng-class="{'hide' : order.Status != 'Finished'}">{{order.EndDate}}</span></td>
                                 <td>{{order.TotalPrice | currency}} VNĐ</td>
-                                <td>{{order.Status}}</td>
+                                <td><span class="label label-success" ng-show="order.Status=='Finished'">{{order.Status}}</span><span class="label label-danger" ng-show="order.Status=='New'">{{order.Status}}</span><span class="label label-warning" ng-show="order.Status=='Pending'">{{order.Status}}</span></td>
                                 <td>
                                     <button type="button" class="btn btn-info" ng-click="showForm($index)">Show Detail</button>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-warning" ng-click="changeStatus($index, 'Pending')" ng-show="order.Status=='New'">Pending</button>
+                                    <button type="button" class="btn btn-success" ng-click="changeStatus($index, 'Finished')" ng-show="order.Status=='Pending'">Finished</button>
+                                    <button type="button" class="btn btn-default" ng-show="order.Status=='Finished'">None</button>
                                 </td>
                             </tr>
                         </tbody>
@@ -93,9 +100,11 @@
                                 <th>Address</th>
                                 <th>Telephone</th>
                                 <th>Created Date</th>
+                                <th>End Date</th>
                                 <th>Total Price</th>
                                 <th>Status</th>
                                 <th>View Detail</th>
+                                <th>Next Process</th>
                             </tr>
                         </tfoot>
                     </table>

@@ -106,6 +106,7 @@
                     <li>
                         <a href="http://facebook.com"><i class="fa fa-twitter" aria-hidden="true"></i></a>
                     </li>
+                </ul>
             </div>
         </div>
         <div class="copyright">
@@ -114,12 +115,94 @@
     </div>
 </div>
     
+<!-- Order Modals -->
+<div id="modalOrder" class="modal modal-fixed-footer" style="width: 90% !important;">
+    <div class="modal-content">
+        <h1 ng-show="isLogin">List Orders</h1>
+
+        <h1 ng-show="!isLogin">Please Login First to see List Orders</h1>
+        <h3 ng-show="listOrders == null || listOrders.length < 1">You don't have any order.</h3>
+        <table ng-show="listOrders != null" class="highlight responsive-table" ng-show="isLogin">
+            <thead>
+                <tr>
+                    <th style="width: 40px; text-align: left;">ID</th>
+                    <th style="width: 100px;">Receiver</th>
+                    <th style="width: 250px;">Address</th>
+                    <th style="width: 100px;">Phone</th>
+                    <th style="width: 100px;">Created Date</th>
+                    <th style="width: 100px;">End Date</th>
+                    <th style="text-align: center">Total Price</th>
+                    <th style="text-align: right; width: 80px">Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in listOrders">
+                    <td colspan="8">
+                        <table class="highlight responsive-table">
+                            <tr>
+                                <td style="width: 40px; text-align: left;"><a style="color: #333;" href="" data-toggle="collapse" data-target="#detail{{item.ID}}">{{item.ID}}</a></td>
+                                <td style="width: 100px;">{{item.CustomerName}}</td>
+                                <td style="width: 250px;">{{item.Address}}</td>
+                                <td style="width: 100px;">{{item.Phone}}</td>
+                                <td style="width: 100px;">{{item.CreatedDate}}</td>
+                                <td style="width: 100px;"> <span ng-class="{'hide': item.Status != 'Finished'}">{{item.EndDate}}</span></td>
+                                <td style="text-align: center">{{item.TotalPrice | currency}}</td>
+                                <td style="text-align: right; width: 80px"><span class="label label-success" ng-show="item.Status=='Finished'">{{item.Status}}</span><span class="label label-info" ng-show="item.Status!='Finished'">{{item.Status}}</span></td>
+                            </tr>
+                            <tr class="collapse" id="detail{{item.ID}}">
+                                <td colspan="8">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th colspan="6" style="text-align: center!important;">LIST ITEM</th>
+                                            </tr>
+                                            <tr>
+                                                <th>Image</th>
+                                                <th>Name</th>
+                                                <th>Color</th>
+                                                <th>Size</th>
+                                                <th>Number</th>
+                                                <th>Price</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="detail in item.OrderDetail">
+                                                <td style="width: 200px">                    
+                                                    <img class="img-responsive" width="200" ng-src="{{detail.Item.ItemMeta[0].MetaValue}}">
+                                                </td>
+                                                <td>{{detail.Item.ProductName}}</td>
+                                                <td>{{detail.Item.Color}}</td>
+                                                <td>{{detail.Size}}</td>
+                                                <td>{{detail.NumberProduct}}</td>
+                                                <td style="text-align: right;">{{detail.Price | currency}} VNĐ</td>
+                                            </tr>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <th colspan="5" style="text-align: center;"><b>Total:</b></th>
+                                                <th style="text-align: right;"><b>{{item.TotalPrice | currency}} VNĐ</b></th>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="modal-footer">
+        <a class="modal-action modal-close waves-effect waves-green btn-flat" style="padding: 0px 30px;">Close</a>
+    </div>
+</div>
+
 <!-- Cart Modals -->
 <div id="modalCart" class="modal modal-fixed-footer" >
     <div class="modal-content">
         <h1 ng-show="isLogin && !isOrder">Cart</h1>
 
-        <h1 ng-show="!isLogin">Please Login First to use Cart</h1>
+        <h3 ng-show="!isLogin">Please Login First to use Cart</h3>
         <table class="highlight responsive-table" ng-show="isLogin && !isOrder">
             <thead>
                 <tr>

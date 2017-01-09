@@ -1,5 +1,5 @@
-appControllers.controller('mainController', ['$scope', '$state', 'authService', 'cartsService', 'ordersService',
-	function($scope, $state, authService, cartsService, ordersService) {
+appControllers.controller('mainController', ['$scope', '$state', 'authService', 'cartsService', 'ordersService', 'productsService',
+	function($scope, $state, authService, cartsService, ordersService, productsService) {
         angular.element(document).ready(function(){
             angular.element('.parallax').parallax();
             angular.element('.modal').modal();
@@ -22,9 +22,63 @@ appControllers.controller('mainController', ['$scope', '$state', 'authService', 
             $scope.isLogin = true;
         }
         
+        var findItemById = function(id, list) {
+            for (var i = 0; i < list.length; i++) {
+                if (list[i].ID == id) {
+                    return list[i];
+                }
+            }
+        }
+        
+        $scope.listOrders = [];
+        var openOrderModal = function() {
+            $('body').removeClass('loaded');
+            productsService.getAllProducts(function(err, result) {       
+                console.log(result);
+                if(err) {return window.alert(err)}
+                if (result.Code != 200) {
+                    return window.alert(result.Message);
+                }
+                /* init listProduct */
+                $scope.listProducts =[];
+                for (var i = 0; i < result.Data.length; i++) {
+                    $scope.listProducts.push(result.Data[i].Item);
+                    $scope.listProducts[i].ItemMeta = result.Data[i].ListMeta;
+                    $scope.listProducts[i].ItemDetail = result.Data[i].ListDetail;
+                    $scope.listProducts[i].index = i;
+                }
+                ordersService.getListOrders(function(err, result) {
+                    console.log(result);
+                    if(err) {return window.alert(err)}
+                    if (result.Code != 200) {
+                        return window.alert(result.Message);
+                    }
+                    $scope.listOrders = [];
+                    for(var i = 0; i < result.Data.length; i++) {
+                        if (result.Data[i].Order.ID_Customer == $scope.user.ID) {
+                            $scope.listOrders.push(result.Data[i].Order);
+                            $scope.listOrders[$scope.listOrders.length - 1].CreatedDate = (new Date($scope.listOrders[$scope.listOrders.length - 1].CreatedDate)).toLocaleDateString();
+                            $scope.listOrders[$scope.listOrders.length - 1].EndDate = (new Date($scope.listOrders[$scope.listOrders.length - 1].EndDate)).toLocaleDateString();
+                            $scope.listOrders[$scope.listOrders.length - 1].OrderDetail = result.Data[i].ListOrderDetail;
+                            for (var j = 0; j < $scope.listOrders[$scope.listOrders.length - 1].OrderDetail.length; j++) {
+                                $scope.listOrders[$scope.listOrders.length - 1].OrderDetail[j].Item = findItemById($scope.listOrders[$scope.listOrders.length - 1].OrderDetail[j].ID_Item, $scope.listProducts);
+                            }
+                        }
+                    }
+                    $scope.$apply();
+                    console.log($scope.listOrders);
+                    $('body').addClass('loaded');
+                    $('#modalOrder').modal('open');
+                })
+            })
+        }
+        
         $scope.login = function() {
             if ($scope.user === null) {
                 $state.go("login");
+            } else {
+                openOrderModal();
+                //$('#modalOrder').modal('open');
             }
         };
         
